@@ -22,7 +22,7 @@ class DocumentsGatewayHTTPClient(HTTPClient):
 
     def get_tariff_document_api(self, account_id: str) -> Response:
         """
-        Получить тарифа по счету.
+        Получить документ тарифа по счету.
 
         :param account_id: Идентификатор счета.
         :return: Ответ от сервера (объект httpx.Response).
