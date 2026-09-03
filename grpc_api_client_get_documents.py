@@ -1,5 +1,4 @@
 from clients.grpc.gateway.accounts.client import build_accounts_gateway_grpc_client
-from clients.grpc.gateway.cards.client import build_cards_gateway_grpc_client
 from clients.grpc.gateway.documents.client import build_documents_gateway_grpc_client
 from clients.grpc.gateway.users.client import build_users_gateway_grpc_client
 
