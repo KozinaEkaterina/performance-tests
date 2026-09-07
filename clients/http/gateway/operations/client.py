@@ -1,9 +1,10 @@
 from typing import TypedDict
 
 from httpx import Response, QueryParams
+from locust.env import Environment
 
 from clients.http.client import HTTPClient, HTTPClientExtensions
-from clients.http.gateway.client import build_gateway_http_client
+from clients.http.gateway.client import build_gateway_http_client, build_gateway_locust_http_client
 from clients.http.gateway.operations.schema import GetOperationsQuerySchema, GetOperationsSummaryQuerySchema, \
     MakeFeeOperationRequestSchema, MakeTopUpOperationRequestSchema, MakeCashbackOperationRequestSchema, \
     MakeTransferOperationRequestSchema, MakePurchaseOperationRequestSchema, MakeBillPaymentOperationRequestSchema, \
@@ -227,3 +228,15 @@ def build_operations_gateway_http_client() -> OperationsGatewayHTTPClient:
     :return: Готовый к использованию OperationsGatewayHTTPClient.
     """
     return OperationsGatewayHTTPClient(client=build_gateway_http_client())
+
+def build_operations_gateway_locust_http_client(environment: Environment) -> OperationsGatewayHTTPClient:
+    """
+    Функция создаёт экземпляр OperationsGatewayHTTPClient адаптированного под Locust.
+
+    Клиент автоматически собирает метрики и передаёт их в Locust через хуки.
+    Используется исключительно в нагрузочных тестах.
+
+    :param environment: Объект окружения Locust.
+    :return: Экземпляр OperationsGatewayHTTPClient с хуками сбора метрик.
+    """
+    return OperationsGatewayHTTPClient(client=build_gateway_locust_http_client(environment))
